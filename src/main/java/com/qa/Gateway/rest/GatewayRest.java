@@ -96,7 +96,7 @@ public class GatewayRest {
     @Value("${path.genDeleteAccount}")
     private String genDeleteAccount;
     
-    @Value("${path.path.genUpdateAccount}")
+    @Value("${path.genUpdateAccount}")
     private String genUpdateAccount;
     
     @GetMapping("${path.getAccounts}")

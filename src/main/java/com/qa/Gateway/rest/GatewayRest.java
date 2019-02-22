@@ -28,8 +28,8 @@ public class GatewayRest {
     @Value ("${url.feedbackForm}")
     private String feedbackFormURL;
     
-    @Value ("${path.genFeedbackForm}")
-    private String genFeedbackFormPath;
+    @Value ("${path.getAllFeedbacks}")
+    private String getAllFeedbacks;
     
     @Value ("${path.genAllFeedbackForms}")
     private String genAllFeedbacksPath;
@@ -40,10 +40,10 @@ public class GatewayRest {
     @Value ("${path.genFeedbackFormsByUserID}")
     private String genFeedbackFormsByUserID;
     
-    @PostMapping("${path.addFeedbackForm}")
-    public FeedbackForm addFeedbackForm(@RequestBody FeedbackForm feedbackForm) {
-    	return requestAddFeedbackForm(feedbackForm);
-    }
+//    @PostMapping("${path.addFeedbackForm}")
+//    public FeedbackForm addFeedbackForm(@RequestBody FeedbackForm feedbackForm) {
+//    	return requestAddFeedbackForm(feedbackForm);
+//    }
     
     @GetMapping("${path.getAllFeedbacks}")
     public FeedbackForm[] getAllFeedbackForms() {
@@ -62,14 +62,14 @@ public class GatewayRest {
     
     
     private FeedbackForm[] requestGetAllFeedbackForms(){
-    	FeedbackForm[] response = restTemplate.getForObject(feedbackFormURL + genAllFeedbacksPath, FeedbackForm[].class);
+    	FeedbackForm[] response = restTemplate.getForObject(feedbackFormURL + getAllFeedbacks, FeedbackForm[].class);
     	return response;
     }
     
-    private FeedbackForm requestAddFeedbackForm(FeedbackForm feedbackForm){
-    	FeedbackForm response = restTemplate.postForObject(feedbackFormURL + genFeedbackFormPath, feedbackForm, FeedbackForm.class);
-    	return response;
-    }
+//    private FeedbackForm requestAddFeedbackForm(FeedbackForm feedbackForm){
+//    	FeedbackForm response = restTemplate.postForObject(feedbackFormURL + genFeedbackFormPath, feedbackForm, FeedbackForm.class);
+//    	return response;
+//    }
     
     private FeedbackForm requestGetFeedbackFormByID(Long feedbackID) {
     	FeedbackForm response = restTemplate.getForObject(feedbackFormURL + genFeedbackFormByIDPath + feedbackID, FeedbackForm.class);
@@ -84,7 +84,7 @@ public class GatewayRest {
     @Value("${url.account}")
     private String accountURL;
     
-    @Value("${path.genAccounts")
+    @Value("${path.genAccounts}")
     private String genAccounts;
     
     @Value("${path.genCreateAccount}")
@@ -96,7 +96,7 @@ public class GatewayRest {
     @Value("${path.genDeleteAccount}")
     private String genDeleteAccount;
     
-    @Value("${path.path.genUpdateAccount}")
+    @Value("${path.genUpdateAccount}")
     private String genUpdateAccount;
     
     @GetMapping("${path.getAccounts}")

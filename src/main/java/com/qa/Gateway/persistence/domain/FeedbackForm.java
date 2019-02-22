@@ -1,14 +1,8 @@
 package com.qa.Gateway.persistence.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
-@Entity
 public class FeedbackForm {
 
-	@Id
-	@GeneratedValue
 	private Long feedbackID;
 	private Long cohortID;
 	private Long userID;

@@ -25,6 +25,27 @@ public class GatewayRest {
     @Autowired
     private RestTemplate restTemplate;
     
+    // Communication with Account MicroService
+    
+    @Value ("${url.accounts}")
+    private String accountURL;
+    
+    @Value ("${path.genAddAccount}")
+    private String addAccount;
+    
+    @PostMapping("${path.getAddAccount}")
+    public Account addAccount(@RequestBody Account account) {
+    	return requestAddAccount(account);
+    }
+    
+    private Account requestAddAccount(Account account){
+    	Account response = restTemplate.postForObject(accountURL + addAccount, account, Account.class);
+    	return response;
+    }
+    
+    
+    // Communication with FeedbackForm MicroService
+    
     @Value ("${url.feedbackForm}")
     private String feedbackFormURL;
     

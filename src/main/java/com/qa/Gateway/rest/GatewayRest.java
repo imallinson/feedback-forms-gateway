@@ -95,10 +95,10 @@ public class GatewayRest {
     	return response;
     }
     
-    @Value ("${path.genByAccountID}")
+    @Value ("${path.genAccountByAccountID}")
     private String getAccountByAccountID;
 
-    @GetMapping("${path.getByAccountID}")
+    @GetMapping("${path.getAccountByAccountID}")
     public Account getAccountByAccountID(@PathVariable Long id) {
     	return requestGetAccountByAccountID(id);
     }
@@ -108,10 +108,10 @@ public class GatewayRest {
     	return response;
     }
     
-    @Value ("${path.genByCohortID}")
+    @Value ("${path.genAccountsByCohortID}")
     private String getAccountsByCohortID;
     
-    @GetMapping("${path.getByCohortID}")
+    @GetMapping("${path.getAccountsByCohortID}")
     public Account[] getAccountsByCohortID(@PathVariable Long id) {
     	return requestGetAccountsByCohortID(id);
     }
@@ -120,6 +120,24 @@ public class GatewayRest {
     	Account[] response = restTemplate.getForObject(retrieverURL + getAccountsByCohortID + id, Account[].class);
     	return response;
     }
+    
+    @Value ("${path.genAccountByEmail}")
+    private String genAccountByEmail;
+    
+    @GetMapping("${path.getAccountByEmail}")
+    public Account getAccountByEmail(@PathVariable String email) {
+    	return requestGetAccountByEmail(email);
+    }
+
+	private Account requestGetAccountByEmail(String email) {
+    	Account response = restTemplate.getForObject(retrieverURL + genAccountByEmail + email, Account.class);
+    	return response;
+	}
+    
+    
+    
+    
+    
     
 
 }

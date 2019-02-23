@@ -99,7 +99,20 @@ public class GatewayRest {
     	Account[] response = restTemplate.getForObject(retrieverURL + getAccounts, Account[].class);
     	return response;
     }
+    
+    @Value ("${path.genByAccountID}")
+    private String getAccountByAccountID;
 
+    @GetMapping("${path.getByAccountID}")
+    public Account getAccountByAccountID(@PathVariable Long id) {
+    	return requestGetAccountByAccountID(id);
+    }
+    
+    private Account requestGetAccountByAccountID(Long id) {
+    	Account response = restTemplate.getForObject(retrieverURL + getAccountByAccountID + id, Account.class);
+    	return response;
+    }
+    
     
     
 

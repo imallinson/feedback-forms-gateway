@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.qa.Gateway.persistence.domain.Account;
+import com.qa.Gateway.persistence.domain.Cohort;
 import com.qa.Gateway.persistence.domain.FeedbackForm;
 
 
@@ -61,4 +62,25 @@ public class GatewayRest {
     	FeedbackForm response = restTemplate.postForObject(feedbackFormURL + addFeedbackForm, feedbackForm, FeedbackForm.class);
     	return response;
     }
+    
+    // Communication with Cohort MicroService
+    
+    @Value ("${url.cohort}")
+    private String cohortURL;
+    
+    @Value ("${path.genAddCohort}")
+    private String addCohort;
+    
+    @PostMapping("${path.getAddCohort}")
+    public Cohort addCohort(@RequestBody Cohort cohort) {
+    	return requestAddCohort(cohort);
+    }
+    
+    private Cohort requestAddCohort(Cohort cohort ){
+    	Cohort response = restTemplate.postForObject(cohortURL + addCohort, cohort, Cohort.class);
+    	return response;
+    }
+    
+    
+
 }

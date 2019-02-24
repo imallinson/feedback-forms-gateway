@@ -21,126 +21,126 @@ import com.qa.Gateway.persistence.domain.Account;
 import com.qa.Gateway.persistence.domain.Cohort;
 import com.qa.Gateway.persistence.domain.FeedbackForm;
 
-
 @CrossOrigin
 @RequestMapping("${path.base}")
 @RestController
 public class GatewayRest {
 
-    @Autowired
-    private RestTemplate restTemplate;
-    
-    // GatewayAPI --> AccountAPI [Post Request]
-    
-    @Value ("${url.accounts}")
-    private String accountURL;
-    
-    @Value ("${path.genAddAccount}")
-    private String addAccount;
-    
-    @PostMapping("${path.getAddAccount}")
-    public Account addAccount(@RequestBody Account account) {
-    	return requestAddAccount(account);
-    }
-   
-    private Account requestAddAccount(Account account){
-    	Account response = restTemplate.postForObject(accountURL + addAccount, account, Account.class);
-    	return response;
-    }
-    
-    // GatewayAPI --> FeedbackFormAPI [Post Request]
-    
-    @Value ("${url.feedbackForm}")
-    private String feedbackFormURL;
-    
-    @Value ("${path.genAddFeedbackForm}")
-    private String addFeedbackForm;
+	@Autowired
+	private RestTemplate restTemplate;
 
-    @PostMapping("${path.getAddFeedbackForm}")
-    public FeedbackForm addFeedbackForm(@RequestBody FeedbackForm feedbackForm) {
-    	return requestAddFeedbackForm(feedbackForm);
-    }
-    
-    private FeedbackForm requestAddFeedbackForm(FeedbackForm feedbackForm){
-    	FeedbackForm response = restTemplate.postForObject(feedbackFormURL + addFeedbackForm, feedbackForm, FeedbackForm.class);
-    	return response;
-    }
-    
-    // GatewayAPI --> CohortAPI [POST Request]
-    
-    @Value ("${url.cohort}")
-    private String cohortURL;
-    
-    @Value ("${path.genAddCohort}")
-    private String addCohort;
-    
-    @PostMapping("${path.getAddCohort}")
-    public Cohort addCohort(@RequestBody Cohort cohort) {
-    	return requestAddCohort(cohort);
-    }
-    
-    private Cohort requestAddCohort(Cohort cohort ){
-    	Cohort response = restTemplate.postForObject(cohortURL + addCohort, cohort, Cohort.class);
-    	return response;
-    }
-    
-    // GatewayAPI --> RetriverAPI ---> DB(Account)[ GET, PUT, DELETE - Requests ]
-    
-    @Value ("${url.retriever}")
-    private String retrieverURL;
-    
-    @Value ("${path.genAccounts}")
-    private String getAccounts;
-    
-    @GetMapping("${path.getAccounts}")
-    public Account[] getAccounts() {
-    	return requestGetAccount();
-    }
-    
-    private Account[] requestGetAccount(){
-    	Account[] response = restTemplate.getForObject(retrieverURL + getAccounts, Account[].class);
-    	return response;
-    }
-    
-    @Value ("${path.genAccountByAccountID}")
-    private String getAccountByAccountID;
+	// GatewayAPI --> AccountAPI [Post Request]
 
-    @GetMapping("${path.getAccountByAccountID}")
-    public Account getAccountByAccountID(@PathVariable Long id) {
-    	return requestGetAccountByAccountID(id);
-    }
-    
-    private Account requestGetAccountByAccountID(Long id) {
-    	Account response = restTemplate.getForObject(retrieverURL + getAccountByAccountID + id, Account.class);
-    	return response;
-    }
-    
-    @Value ("${path.genAccountsByCohortID}")
-    private String getAccountsByCohortID;
-    
-    @GetMapping("${path.getAccountsByCohortID}")
-    public Account[] getAccountsByCohortID(@PathVariable Long id) {
-    	return requestGetAccountsByCohortID(id);
-    }
-    
-    private Account[] requestGetAccountsByCohortID(Long id){
-    	Account[] response = restTemplate.getForObject(retrieverURL + getAccountsByCohortID + id, Account[].class);
-    	return response;
-    }
-    
-    @Value ("${path.genAccountByEmail}")
-    private String genAccountByEmail;
-    
-    @GetMapping("${path.getAccountByEmail}")
-    public Account getAccountByEmail(@PathVariable String email) {
-    	return requestGetAccountByEmail(email);
-    }
+	@Value("${url.accounts}")
+	private String accountURL;
+
+	@Value("${path.genAddAccount}")
+	private String addAccount;
+
+	@PostMapping("${path.getAddAccount}")
+	public Account addAccount(@RequestBody Account account) {
+		return requestAddAccount(account);
+	}
+
+	private Account requestAddAccount(Account account) {
+		Account response = restTemplate.postForObject(accountURL + addAccount, account, Account.class);
+		return response;
+	}
+
+	// GatewayAPI --> FeedbackFormAPI [Post Request]
+
+	@Value("${url.feedbackForm}")
+	private String feedbackFormURL;
+
+	@Value("${path.genAddFeedbackForm}")
+	private String addFeedbackForm;
+
+	@PostMapping("${path.getAddFeedbackForm}")
+	public FeedbackForm addFeedbackForm(@RequestBody FeedbackForm feedbackForm) {
+		return requestAddFeedbackForm(feedbackForm);
+	}
+
+	private FeedbackForm requestAddFeedbackForm(FeedbackForm feedbackForm) {
+		FeedbackForm response = restTemplate.postForObject(feedbackFormURL + addFeedbackForm, feedbackForm,
+				FeedbackForm.class);
+		return response;
+	}
+
+	// GatewayAPI --> CohortAPI [POST Request]
+
+	@Value("${url.cohort}")
+	private String cohortURL;
+
+	@Value("${path.genAddCohort}")
+	private String addCohort;
+
+	@PostMapping("${path.getAddCohort}")
+	public Cohort addCohort(@RequestBody Cohort cohort) {
+		return requestAddCohort(cohort);
+	}
+
+	private Cohort requestAddCohort(Cohort cohort) {
+		Cohort response = restTemplate.postForObject(cohortURL + addCohort, cohort, Cohort.class);
+		return response;
+	}
+
+	// GatewayAPI --> RetriverAPI ---> DB(Account)[ GET, PUT, DELETE - Requests ]
+
+	@Value("${url.retriever}")
+	private String retrieverURL;
+
+	@Value("${path.genAccounts}")
+	private String getAccounts;
+
+	@GetMapping("${path.getAccounts}")
+	public Account[] getAccounts() {
+		return requestGetAccount();
+	}
+
+	private Account[] requestGetAccount() {
+		Account[] response = restTemplate.getForObject(retrieverURL + getAccounts, Account[].class);
+		return response;
+	}
+
+	@Value("${path.genAccountByAccountID}")
+	private String getAccountByAccountID;
+
+	@GetMapping("${path.getAccountByAccountID}")
+	public Account getAccountByAccountID(@PathVariable Long id) {
+		return requestGetAccountByAccountID(id);
+	}
+
+	private Account requestGetAccountByAccountID(Long id) {
+		Account response = restTemplate.getForObject(retrieverURL + getAccountByAccountID + id, Account.class);
+		return response;
+	}
+
+	@Value("${path.genAccountsByCohortID}")
+	private String getAccountsByCohortID;
+
+	@GetMapping("${path.getAccountsByCohortID}")
+	public Account[] getAccountsByCohortID(@PathVariable Long id) {
+		return requestGetAccountsByCohortID(id);
+	}
+
+	private Account[] requestGetAccountsByCohortID(Long id) {
+		Account[] response = restTemplate.getForObject(retrieverURL + getAccountsByCohortID + id, Account[].class);
+		return response;
+	}
+
+	@Value("${path.genAccountByEmail}")
+	private String genAccountByEmail;
+
+	@GetMapping("${path.getAccountByEmail}")
+	public Account getAccountByEmail(@PathVariable String email) {
+		return requestGetAccountByEmail(email);
+	}
 
 	private Account requestGetAccountByEmail(String email) {
-    	Account response = restTemplate.getForObject(retrieverURL + genAccountByEmail + email, Account.class);
-    	return response;
+		Account response = restTemplate.getForObject(retrieverURL + genAccountByEmail + email, Account.class);
+		return response;
 	}
-	
+
 //	@Value ("${path.genUpdateAccount}")
 //    private String genUpdateAccount;
 //	
@@ -156,40 +156,47 @@ public class GatewayRest {
 //    	return null;
 //    }
 //    
+
+	// GatewayAPI --> RetriverAPI ---> DB(FeedbackForm)[ GET, PUT, DELETE - Requests
+	// ]
+
+	@Value("${path.genAllFeedbackForms}")
+	private String genAllFeedbacksPath;
+
+	@GetMapping("${path.getAllFeedbacks}")
+	public FeedbackForm[] getAllFeedbackForms() {
+		return requestGetAllFeedbackForms();
+	}
+
+	private FeedbackForm[] requestGetAllFeedbackForms() {
+		FeedbackForm[] response = restTemplate.getForObject(retrieverURL + genAllFeedbacksPath, FeedbackForm[].class);
+		return response;
+	}
+
+	@Value("${path.genFeedbackFormByID}")
+	private String genFeedbackFormByID;
+
+	@GetMapping("${path.getFeedbackFormByID}")
+	public FeedbackForm getFeedbackFormByID(@PathVariable Long feedbackID) {
+		return requestGetFeedbackFormByID(feedbackID);
+	}
+
+	private FeedbackForm requestGetFeedbackFormByID(Long feedbackID) {
+		FeedbackForm response = restTemplate.getForObject(retrieverURL + genFeedbackFormByID + feedbackID, FeedbackForm.class);
+		return response;
+	}
 	
-	
-    // GatewayAPI --> RetriverAPI ---> DB(FeedbackForm)[ GET, PUT, DELETE - Requests ]
-	
-	@Value ("${path.genAllFeedbackForms}")
-    private String genAllFeedbacksPath;
-	
-	 @GetMapping("${path.getAllFeedbacks}")
-	    public FeedbackForm[] getAllFeedbackForms() {
-	    	return requestGetAllFeedbackForms();
-	    }
-	 
-	 private FeedbackForm[] requestGetAllFeedbackForms(){
-	    	FeedbackForm[] response = restTemplate.getForObject(retrieverURL + genAllFeedbacksPath, FeedbackForm[].class);
-	    	return response;
-	    }
-	 
-	 
-	 @Value ("${path.genFeedbackFormByID}")
-	    private String genFeedbackFormByID;
-	 
-	   @GetMapping("${path.getFeedbackFormByID}")
-	    public FeedbackForm getFeedbackFormByID(@PathVariable Long feedbackID) {
-	    	return requestGetFeedbackFormByID(feedbackID);
+	@Value ("${path.genFeedbackFormsByAccountID}")
+    private String genFeedbackFormsByAccountID;
+
+	@GetMapping("${path.getFeedbackFormsByAccountID}")
+	    public FeedbackForm[] getFeedbackFormsByAccountID(@PathVariable Long accountID){
+	    	return requestGetFeedbackFormsByAccountID(accountID);
 	    }
 	   
-	   private FeedbackForm requestGetFeedbackFormByID(Long feedbackID) {
-	    	FeedbackForm response = restTemplate.getForObject(retrieverURL + genFeedbackFormByID + feedbackID , FeedbackForm.class);
+	   private FeedbackForm[] requestGetFeedbackFormsByAccountID (Long accountID) {
+	    	FeedbackForm[] response = restTemplate.getForObject(retrieverURL + genFeedbackFormsByAccountID + accountID, FeedbackForm[].class);
 	    	return response;
 	    }
-
-    
-    
-    
-    
 
 }

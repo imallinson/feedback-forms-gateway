@@ -172,6 +172,20 @@ public class GatewayRest {
 	    	FeedbackForm[] response = restTemplate.getForObject(retrieverURL + genAllFeedbacksPath, FeedbackForm[].class);
 	    	return response;
 	    }
+	 
+	 
+	 @Value ("${path.genFeedbackFormByID}")
+	    private String genFeedbackFormByID;
+	 
+	   @GetMapping("${path.getFeedbackFormByID}")
+	    public FeedbackForm getFeedbackFormByID(@PathVariable Long feedbackID) {
+	    	return requestGetFeedbackFormByID(feedbackID);
+	    }
+	   
+	   private FeedbackForm requestGetFeedbackFormByID(Long feedbackID) {
+	    	FeedbackForm response = restTemplate.getForObject(retrieverURL + genFeedbackFormByID + feedbackID , FeedbackForm.class);
+	    	return response;
+	    }
 
     
     

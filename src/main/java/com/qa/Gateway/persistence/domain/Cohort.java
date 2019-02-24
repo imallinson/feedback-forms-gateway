@@ -3,7 +3,6 @@ package com.qa.Gateway.persistence.domain;
 
 public class Cohort {
 	
-    private Object _id;
 	private Long cohortId;
 	private String cohortName;
 	private String trainerName;
@@ -60,15 +59,5 @@ public class Cohort {
 	public void setCohortDescription(String cohortDescription) {
 		this.cohortDescription = cohortDescription;
 	}
-	
-	public Object get_id() {
-		return _id;
-	}
-
-	public void set_id(Object _id) {
-		this._id = _id;
-	}
-	
-	
 	
 }

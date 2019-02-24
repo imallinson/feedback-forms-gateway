@@ -210,6 +210,17 @@ public class GatewayRest {
 		return response;
 	}
 	
-
+	@Value("${path.genCohortbyID}")
+	private String genCohortbyID;
+	
+	@GetMapping("${path.getCohortbyID}")
+	public Cohort getCohortbyID(@PathVariable Long id) {
+		return requestGetCohortbyID(id);
+	}
+	
+	private Cohort requestGetCohortbyID(Long CohortID) {
+		Cohort response = restTemplate.getForObject(retrieverURL + genCohortbyID + CohortID, Cohort.class);
+		return response;
+	}
 
 }

@@ -2,10 +2,16 @@ package com.qa.Gateway.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 import com.qa.Gateway.persistence.domain.Account;
 import com.qa.Gateway.persistence.domain.Cohort;
 import com.qa.Gateway.persistence.domain.FeedbackForm;
+
 
 @CrossOrigin
 @RequestMapping("${path.base}")
@@ -133,8 +140,39 @@ public class GatewayRest {
     	Account response = restTemplate.getForObject(retrieverURL + genAccountByEmail + email, Account.class);
     	return response;
 	}
-    
-    
+	
+//	@Value ("${path.genUpdateAccount}")
+//    private String genUpdateAccount;
+//	
+//    @PutMapping("${path.getUpdateAccount}")
+//    public ResponseEntity<String> getUpdateAccountBy_id(@RequestBody Account account, @PathVariable String id) {
+//    	return requestUpdateAccountBy_id(account,id);
+//    }
+//    
+//    private ResponseEntity<String>  requestUpdateAccountBy_id(Account account , String id) {
+//    	String url = retrieverURL + genUpdateAccount + id;
+//    	restTemplate.put(url, account, "world");
+//       
+//    	return null;
+//    }
+//    
+	
+	
+    // GatewayAPI --> RetriverAPI ---> DB(FeedbackForm)[ GET, PUT, DELETE - Requests ]
+	
+	@Value ("${path.genAllFeedbackForms}")
+    private String genAllFeedbacksPath;
+	
+	 @GetMapping("${path.getAllFeedbacks}")
+	    public FeedbackForm[] getAllFeedbackForms() {
+	    	return requestGetAllFeedbackForms();
+	    }
+	 
+	 private FeedbackForm[] requestGetAllFeedbackForms(){
+	    	FeedbackForm[] response = restTemplate.getForObject(retrieverURL + genAllFeedbacksPath, FeedbackForm[].class);
+	    	return response;
+	    }
+
     
     
     

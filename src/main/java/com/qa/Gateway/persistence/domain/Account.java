@@ -1,7 +1,8 @@
 package com.qa.Gateway.persistence.domain;
 
 public class Account {
-
+	
+	private String _id;
 	private Long accountID;
 	private Long cohortID;
 	private boolean admin;
@@ -23,6 +24,16 @@ public class Account {
 		this.email = email;
 		this.password = password;
 		this.flagged = flagged;
+	}
+	
+	
+
+	public String get_id() {
+		return _id;
+	}
+
+	public void set_id(String _id) {
+		this._id = _id;
 	}
 
 	public Long getAccountID() {
@@ -89,5 +100,6 @@ public class Account {
 	public void setFlagged(boolean flagged) {
 		this.flagged = flagged;
 	}
+
 	
 }

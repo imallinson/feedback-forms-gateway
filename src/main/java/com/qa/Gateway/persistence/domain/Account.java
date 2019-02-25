@@ -1,10 +1,13 @@
 package com.qa.Gateway.persistence.domain;
 
 public class Account {
+
+	private String _id;
 	private Long accountID;
 	private Long cohortID;
 	private boolean admin;
-	private String userName;
+	private String firstName;
+	private String lastName;
 	private String email;
 	private String password;
 	private boolean flagged;
@@ -13,13 +16,24 @@ public class Account {
 		
 	}
 	
-	public Account(Long cohortID, boolean admin, String userName, String email, String password, boolean flagged) {
+	public Account(Long cohortID, boolean admin, String firstName, String lastName, String email, String password, boolean flagged) {
 		this.cohortID = cohortID;
 		this.admin = admin;
-		this.userName = userName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.flagged = flagged;
+	}
+	
+	
+
+	public String get_id() {
+		return _id;
+	}
+
+	public void set_id(String _id) {
+		this._id = _id;
 	}
 
 	public Long getAccountID() {
@@ -46,12 +60,21 @@ public class Account {
 		this.admin = admin;
 	}
 
-	public String getUserName() {
-		return userName;
+
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getEmail() {
@@ -77,7 +100,6 @@ public class Account {
 	public void setFlagged(boolean flagged) {
 		this.flagged = flagged;
 	}
-	
 
 	
 }

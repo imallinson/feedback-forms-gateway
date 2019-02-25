@@ -144,10 +144,15 @@ public class GatewayRest {
 	@Value ("${path.genUpdateAccount}")
     private String genUpdateAccount;
 	
-//    @PutMapping("${path.getUpdateAccount}")
-//    public String getUpdateAccountBy_id(@RequestBody Account account, @PathVariable String id) {
-//    	return requestUpdateAccountBy_id(account,id);
-//    }
+    @PutMapping("${path.getUpdateAccount}")
+    public ResponseEntity<String> getUpdateAccountBy_id(@RequestBody Account account, @PathVariable String id) {
+    	return requestUpdateAccountBy_id(account,id);
+    }
+    
+    private ResponseEntity<String> requestUpdateAccountBy_id(Account account, String id) {
+    	 HttpEntity<Account> entity = new HttpEntity<Account>(account);
+    	return restTemplate.exchange(retrieverURL + genUpdateAccount + id , HttpMethod.PUT, entity, String.class);
+    }
     
 
 

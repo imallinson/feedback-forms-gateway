@@ -3,7 +3,7 @@ package com.qa.Gateway.persistence.domain;
 
 public class Cohort {
 	
-	private Long cohortId;
+	private Long cohortID;
 	private String cohortName;
 	private String trainerName;
 	private int week;
@@ -21,11 +21,11 @@ public class Cohort {
 	}
 
 	public Long getCohortId() {
-		return cohortId;
+		return cohortID;
 	}
 
-	public void setCohortId(Long cohortId) {
-		this.cohortId = cohortId;
+	public void setCohortId(Long cohortID) {
+		this.cohortID = cohortID;
 	}
 
 	public String getCohortName() {

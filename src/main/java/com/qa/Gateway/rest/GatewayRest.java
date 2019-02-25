@@ -142,6 +142,7 @@ public class GatewayRest {
 	}
 
 	@Value ("${path.genUpdateAccount}")
+
     private String genUpdateAccount;
 	
     @PutMapping("${path.getUpdateAccount}")
@@ -154,8 +155,6 @@ public class GatewayRest {
     	return restTemplate.exchange(retrieverURL + genUpdateAccount + id , HttpMethod.PUT, entity, String.class);
     }
     
-
-
 	// GatewayAPI --> RetriverAPI ---> DB(FeedbackForm)[ GET, PUT, DELETE - Requests ]
 
 

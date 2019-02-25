@@ -1,7 +1,7 @@
 package com.qa.Gateway.persistence.domain;
 
 public class Account {
-	
+
 	private String _id;
 	private Long accountID;
 	private Long cohortID;

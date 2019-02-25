@@ -98,6 +98,5 @@ public class FeedbackForm {
 	public void setQuestion4(String question4) {
 		this.question4 = question4;
 	}
-	
-	
+
 }

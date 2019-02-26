@@ -8,6 +8,7 @@ public class Cohort {
 	private String trainerName;
 	private int week;
 	private String cohortDescription;
+	private String createdOn;
 	
 	public Cohort() {
 		
@@ -18,6 +19,14 @@ public class Cohort {
 		this.trainerName = trainerName;
 		this.week = week;
 		this.cohortDescription = cohortDescription;
+	}
+
+	public String getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(String createdOn) {
+		this.createdOn = createdOn;
 	}
 
 	public Long getCohortID() {

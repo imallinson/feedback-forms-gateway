@@ -38,12 +38,12 @@ public class GatewayRest {
 	private String addAccount;
 
 	@PostMapping("${path.getAddAccount}")
-	public Account addAccount(@RequestBody Account account) {
+	public String addAccount(@RequestBody Account account) {
 		return requestAddAccount(account);
 	}
 
-	private Account requestAddAccount(Account account) {
-		Account response = restTemplate.postForObject(accountURL + addAccount, account, Account.class);
+	private String requestAddAccount(Account account) {
+		String response = restTemplate.postForObject(accountURL + addAccount, account, String.class);
 		return response;
 	}
 
@@ -141,22 +141,22 @@ public class GatewayRest {
 		return response;
 	}
 
-	@Value ("${path.genUpdateAccount}")
+	@Value("${path.genUpdateAccount}")
 
-    private String genUpdateAccount;
-	
-    @PutMapping("${path.getUpdateAccount}")
-    public ResponseEntity<String> getUpdateAccountBy_id(@RequestBody Account account, @PathVariable String id) {
-    	return requestUpdateAccountBy_id(account,id);
-    }
-    
-    private ResponseEntity<String> requestUpdateAccountBy_id(Account account, String id) {
-    	 HttpEntity<Account> entity = new HttpEntity<Account>(account);
-    	return restTemplate.exchange(retrieverURL + genUpdateAccount + id , HttpMethod.PUT, entity, String.class);
-    }
-    
-	// GatewayAPI --> RetriverAPI ---> DB(FeedbackForm)[ GET, PUT, DELETE - Requests ]
+	private String genUpdateAccount;
 
+	@PutMapping("${path.getUpdateAccount}")
+	public ResponseEntity<String> getUpdateAccountBy_id(@RequestBody Account account, @PathVariable String id) {
+		return requestUpdateAccountBy_id(account, id);
+	}
+
+	private ResponseEntity<String> requestUpdateAccountBy_id(Account account, String id) {
+		HttpEntity<Account> entity = new HttpEntity<Account>(account);
+		return restTemplate.exchange(retrieverURL + genUpdateAccount + id, HttpMethod.PUT, entity, String.class);
+	}
+
+	// GatewayAPI --> RetriverAPI ---> DB(FeedbackForm)[ GET, PUT, DELETE - Requests
+	// ]
 
 	@Value("${path.genAllFeedbackForms}")
 	private String genAllFeedbacksPath;
@@ -198,33 +198,50 @@ public class GatewayRest {
 				FeedbackForm[].class);
 		return response;
 	}
-	
+
 	// GatewayAPI --> RetriverAPI ---> DB(Cohort)[ GET, PUT, DELETE - Requests ]
-	
+
 	@Value("${path.genCohorts}")
 	private String genCohorts;
-	
+
 	@GetMapping("${path.getCohorts}")
 	public Cohort[] getCohorts() {
 		return requestGetCohorts();
 	}
 
 	private Cohort[] requestGetCohorts() {
-		Cohort [] response = restTemplate.getForObject(retrieverURL + genCohorts, Cohort[].class);
+		Cohort[] response = restTemplate.getForObject(retrieverURL + genCohorts, Cohort[].class);
 		return response;
 	}
-	
+
 	@Value("${path.genCohortbyID}")
 	private String genCohortbyID;
-	
+
 	@GetMapping("${path.getCohortbyID}")
 	public Cohort getCohortbyID(@PathVariable Long id) {
 		return requestGetCohortbyID(id);
 	}
-	
+
 	private Cohort requestGetCohortbyID(Long CohortID) {
 		Cohort response = restTemplate.getForObject(retrieverURL + genCohortbyID + CohortID, Cohort.class);
 		return response;
+	}
+
+	@Value("${path.genUpdateWeekNumber}")
+	private String genUpdateWeekNumber;
+
+	@PutMapping("${path.getUpdateWeekNumber}")
+	public ResponseEntity<Long> getUpdateWeekNumber(@PathVariable Long cohortID) {
+		return requestUpdateWeekNumber(cohortID);
+	}
+
+	private ResponseEntity<Long> requestUpdateWeekNumber(Long cohortID) {
+		Cohort cohort = new Cohort();
+		HttpEntity<Cohort> entity = new HttpEntity<Cohort>(cohort);
+
+		return restTemplate.exchange(retrieverURL + genUpdateWeekNumber + cohortID, HttpMethod.PUT, entity,
+				Long.class);
+
 	}
 
 }

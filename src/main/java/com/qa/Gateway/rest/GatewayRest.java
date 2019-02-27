@@ -38,12 +38,12 @@ public class GatewayRest {
 	private String addAccount;
 
 	@PostMapping("${path.getAddAccount}")
-	public Account addAccount(@RequestBody Account account) {
+	public String addAccount(@RequestBody Account account) {
 		return requestAddAccount(account);
 	}
 
-	private Account requestAddAccount(Account account) {
-		Account response = restTemplate.postForObject(accountURL + addAccount, account, Account.class);
+	private String requestAddAccount(Account account) {
+		String response = restTemplate.postForObject(accountURL + addAccount, account, String.class);
 		return response;
 	}
 
